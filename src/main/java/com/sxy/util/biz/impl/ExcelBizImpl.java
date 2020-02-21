@@ -11,19 +11,20 @@ import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 /**
  * @author weitao1
  * @time 2020/02/17
  */
+@Service
 public class ExcelBizImpl extends AbstractBiz implements IExcelBiz {
 
-    public OutputStream avg(InputStream fis) {
+    @Override
+    public InputStream avg(InputStream fis) {
 
         // 设置数字格式
         jxl.write.NumberFormat nf = new jxl.write.NumberFormat("#0");
@@ -71,10 +72,10 @@ public class ExcelBizImpl extends AbstractBiz implements IExcelBiz {
         WritableWorkbook targetSheet;
         // 创建一个工作表,输出目标文件
         WritableSheet sheet;
-        FileOutputStream outputStream = null;
+        ByteArrayOutputStream os = null;
         try {
-            outputStream = new FileOutputStream("D:\\WorkSpaces\\2.xls");
-            targetSheet = Workbook.createWorkbook(outputStream);
+            os = new ByteArrayOutputStream();
+            targetSheet = Workbook.createWorkbook(os);
             sheet = targetSheet.createSheet("sheet1", 0);
             //表头
             sheet.addCell(new Label(0, 0, "计划id"));
@@ -101,7 +102,8 @@ public class ExcelBizImpl extends AbstractBiz implements IExcelBiz {
         } catch (WriteException | IOException e) {
             e.printStackTrace();
         }
-        return outputStream;
+        byte[] byteArray = os.toByteArray();
+        return new ByteArrayInputStream(byteArray);
     }
 }
 
