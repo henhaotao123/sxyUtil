@@ -34,7 +34,15 @@ public class ExcelController {
         return is;
     }
 
-    @RequestMapping("test")
+//    @RequestMapping("/cihui")
+//    public InputStream getExcelLetter(HttpServletResponse response){
+//        InputStream is = null;
+//        is = excelBiz.randomLetter();
+//        response.setHeader("Content-disposition", "attachment; filename=" + System.currentTimeMillis() + ".xls");
+//        response.setContentType("application/msexcel");
+//        return is;
+//    }
+    @RequestMapping("/test")
     public String test(){
         System.out.println("test");
         return "index.html";

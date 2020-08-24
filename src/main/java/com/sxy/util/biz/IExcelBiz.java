@@ -1,5 +1,7 @@
 package com.sxy.util.biz;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -10,4 +12,5 @@ import java.io.InputStream;
 public interface IExcelBiz {
 
     InputStream avg(InputStream fis);
+//    InputStream randomLetter() throws IOException;
 }
